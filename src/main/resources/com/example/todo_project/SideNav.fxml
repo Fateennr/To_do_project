@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="777.0" prefWidth="360.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutY="132.0" prefHeight="276.0" prefWidth="360.0">
+         <children>
+            <HBox fx:id="To_do_list" prefHeight="94.0" prefWidth="360.0">
+               <children>
+                  <Circle fill="#898080" radius="17.0" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label text="To-do List" textFill="#898080">
+                     <font>
+                        <Font name="ArtifaktElement-Black" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="Stats" prefHeight="88.0" prefWidth="360.0">
+               <children>
+                  <Circle fill="#898080" radius="17.0" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label text="Stats" textFill="#898080">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="About_Us" prefHeight="91.0" prefWidth="360.0">
+               <children>
+                  <Circle fill="#898080" radius="17.0" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label text="About Us" textFill="#898080">
+                     <font>
+                        <Font name="ArtifaktElement-Black" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
