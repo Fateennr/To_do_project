@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/ProceedButton"
+        android:id="@+id/StartTimerButton"
         android:layout_width="143dp"
         android:layout_height="57dp"
         android:layout_alignEnd="@+id/taskname"

@@ -25,6 +25,10 @@
             android:name=".TaskSummaryActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".TimerActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

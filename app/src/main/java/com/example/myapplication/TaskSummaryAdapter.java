@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class TaskSummaryAdapter extends RecyclerView.Adapter<TaskSummaryAdapter.TaskViewHolder> {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskSummaryAdapter(List<Task> taskList) {
         this.taskList = taskList;
@@ -27,11 +28,12 @@ public class TaskSummaryAdapter extends RecyclerView.Adapter<TaskSummaryAdapter.
         return new TaskViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
         holder.taskName.setText(task.getTaskName());
-        holder.taskTime.setText(task.getTaskTime());
+        holder.taskTime.setText(task.getMM()+":"+ task.getSS());
     }
 
     @Override
@@ -39,7 +41,7 @@ public class TaskSummaryAdapter extends RecyclerView.Adapter<TaskSummaryAdapter.
         return taskList.size();
     }
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder {
+    public static class TaskViewHolder extends RecyclerView.ViewHolder {
         TextView taskName;
         TextView taskTime;
 

@@ -8,11 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +28,7 @@ public class TaskActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         taskList = new ArrayList<>();
-        taskList.add(new Task("", "")); // Add the initial task item
+        taskList.add(new Task("", 0, 0)); // Add the initial task item
 
         taskAdapter = new TaskAdapter(taskList);
         recyclerView.setAdapter(taskAdapter);
@@ -42,11 +38,11 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Add a new empty task item when the plus button is clicked
-                taskAdapter.addTask(new Task("", ""));
+                taskAdapter.addTask(new Task("", 0 , 0));
             }
         });
 
-        Button proceedButton = findViewById(R.id.ProceedButton);
+        Button proceedButton = findViewById(R.id.StartTimerButton);
         proceedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -64,15 +60,15 @@ public class TaskActivity extends AppCompatActivity {
                     // Update the corresponding Task object in the list
                     Task task = taskList.get(i);
                     task.setTaskName(taskName);
-                    Log.d("TaskDebug", "Task " + i + ": Name = " + task.getTaskName() + ", Time = " + task.getTaskTime());
+                    Log.d("TaskDebug", "Task " + i + ": Name = " + task.getTaskName() + ", Time = " + task.getMM()+":"+task.getSS());
 
 
                     if(taskTime == "" || taskTime == ":") //fixes needed, for input ":"
                     {
-                        task.setTaskTime("00:05");
+                        task.setTaskTime(0, 5);
                     }
                     else {
-                        task.setTaskTime(processTime(taskTime));
+                        processTime(taskTime , task);
                     }
 //                    task.setTaskTime(taskTime);
 
@@ -81,16 +77,19 @@ public class TaskActivity extends AppCompatActivity {
 
                 // Now proceed to the next activity with the updated task list
                 ArrayList<String> taskNames = new ArrayList<>();
-                ArrayList<String> taskTimes = new ArrayList<>();
+                ArrayList<Integer> taskMM = new ArrayList<>();
+                ArrayList<Integer> taskSS = new ArrayList<>();
 
                 for (Task task : taskList) {
                     taskNames.add(task.getTaskName());
-                    taskTimes.add(task.getTaskTime());
+                    taskMM.add(task.getMM());
+                    taskSS.add(task.getSS());
                 }
 
                 Intent intent = new Intent(TaskActivity.this, TaskSummaryActivity.class);
                 intent.putStringArrayListExtra("taskNames", taskNames);
-                intent.putStringArrayListExtra("taskTimes", taskTimes);
+                intent.putIntegerArrayListExtra("taskMM", taskMM);
+                intent.putIntegerArrayListExtra("taskSS", taskSS);
                 startActivity(intent);
             }
 
@@ -99,7 +98,7 @@ public class TaskActivity extends AppCompatActivity {
     }
 
     // process time inputs
-    public String processTime(String taskTime) {
+    public void processTime(String taskTime, Task task) {
         // Split the input time by the first occurrence of ":"
 
         int colonIndex = taskTime.indexOf(":");
@@ -117,8 +116,12 @@ public class TaskActivity extends AppCompatActivity {
             {
                 minutePart = taskTime.substring(0, 3);
             }
+
             // If no colon is found, treat the entire input as minutes and append ":00"
-            return minutePart + ":00";
+            minutes = Integer.parseInt(minutePart);
+            task.setTaskTime(minutes, 0);
+
+
         }
         else if(colonIndex == 0) // if colon is in front
         {
@@ -133,7 +136,6 @@ public class TaskActivity extends AppCompatActivity {
             }
 
             seconds = Integer.parseInt(secondPart);
-            minutes = 0;
 
             if(seconds >= 60)
             {
@@ -141,7 +143,7 @@ public class TaskActivity extends AppCompatActivity {
                 minutes += 1;
             }
 
-            return minutes + ":" + seconds;
+            task.setTaskTime(minutes, seconds);
         }
         else
         {
@@ -163,7 +165,7 @@ public class TaskActivity extends AppCompatActivity {
                 secondPart = secondPart.substring(0, secondColonIndex);
             }
 
-            if(secondPart.length() > 3)
+            if(secondPart.length() > 2)
             {
                 secondPart = secondPart.substring(0,2);
             }
@@ -180,11 +182,11 @@ public class TaskActivity extends AppCompatActivity {
             }
 
             // Format the seconds to always be two digits
-            String formattedSeconds = String.format("%02d", seconds);
+//            String formattedSeconds = String.format("%02d", seconds);
 
 
             // Return the processed time in "mm:ss" format
-            return minutes + ":" + formattedSeconds;
+            task.setTaskTime(minutes, seconds);
         }
     }
 
