@@ -1,0 +1,106 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeController">
+
+    <ImageView
+        android:id="@+id/topbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:srcCompat="@drawable/rectangle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/hamburger_menu"
+        android:layout_width="60dp"
+        android:layout_height="52dp"
+        app:srcCompat="@drawable/baseline_menu_24"
+        app:layout_constraintTop_toTopOf="@+id/topbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"/>
+
+
+    <ImageView
+        android:id="@+id/Clockbody"
+        android:layout_width="365dp"
+        android:layout_height="378dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:srcCompat="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/DayTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="It's 12:00 AM!"
+        android:textColor="#898080"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar" />
+
+    <ImageView
+        android:id="@+id/minuteDial"
+        android:layout_width="15dp"
+        android:layout_height="134dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Clockbody"
+        app:layout_constraintEnd_toEndOf="@+id/Clockbody"
+        app:layout_constraintStart_toStartOf="@+id/Clockbody"
+        app:layout_constraintTop_toTopOf="@+id/Clockbody"
+        app:layout_constraintVertical_bias="0.237"
+        app:srcCompat="@drawable/dials" />
+
+    <ImageView
+        android:id="@+id/hourDial"
+        android:layout_width="15dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Clockbody"
+        app:layout_constraintEnd_toEndOf="@+id/Clockbody"
+        app:layout_constraintStart_toStartOf="@+id/Clockbody"
+        app:layout_constraintTop_toTopOf="@+id/Clockbody"
+        app:layout_constraintVertical_bias="0.386"
+        app:srcCompat="@drawable/dials" />
+
+    <TextView
+        android:id="@+id/Productive_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Let's Have a Productive Morning!"
+        android:textColor="#898080"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/Clockbody"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/GetStartedButton"
+        android:layout_width="143dp"
+        android:layout_height="57dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Get Started!"
+        app:backgroundTint="#1ec58e"
+        app:layout_constraintTop_toBottomOf="@+id/Productive_Time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
