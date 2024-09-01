@@ -10,14 +10,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="777.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="777.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todo_project.HomeController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1ec58e" height="54.0" strokeType="INSIDE" width="360.0" />
       <Circle fill="#1ec58e" layoutX="180.0" layoutY="326.0" radius="131.0" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="180.0" layoutY="326.0" radius="115.0" strokeType="INSIDE" />
       <Polygon fx:id="ClockDial" fill="#898080" layoutX="178.0" layoutY="296.0" points="-10.20001220703125, 40.0, 13.0, 40.0, 0.0, -60.0" strokeType="INSIDE" />
-      <Label fx:id="DayTime" layoutX="129.0" layoutY="130.0" text="It's 12 am!" textFill="#898080">
+      <Label fx:id="DayTime" layoutX="114.0" layoutY="132.0" text="It's 12 am!" textFill="#898080">
          <font>
             <Font name="ArtifaktElement-Black" size="20.0" />
          </font>
