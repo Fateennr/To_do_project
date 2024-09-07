@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.List;
 
-public class TimerActivity extends AppCompatActivity {
+public class TimerActivity extends AppCompatActivity
+{
 
     private List<Task> tasks;
     private int currentTaskIndex = 0;
@@ -24,23 +26,31 @@ public class TimerActivity extends AppCompatActivity {
 
     private TextView timerTextView;
     private TextView taskNameTextView;
+    private TextView timer_on;
     private ConstraintLayout backgroundLayout;
     private Button startPauseButton;
+    private ImageView check;
+    private ImageView taskIcon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer);
 
+
         timerTextView = findViewById(R.id.Timer);
         taskNameTextView = findViewById(R.id.taskname);
         backgroundLayout = findViewById(R.id.main);
         startPauseButton = findViewById(R.id.TimerButton);
+        timer_on = findViewById(R.id.timeron);
+        check = findViewById(R.id.check);
+        taskIcon = findViewById(R.id.taskIcon);
 
         // Get the task list from the intent
         tasks = getIntent().getParcelableArrayListExtra("tasks");
 
-        // Set up the first task
+//        // Set up the first task
         setTask(currentTaskIndex);
 
         startPauseButton.setOnClickListener(v -> startPauseTimer());
@@ -55,43 +65,74 @@ public class TimerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void startPauseTimer() {
-        if (isRunning) {
+        if (isRunning)
+        {
             isRunning = false;
             if (countDownTimer != null) {
                 countDownTimer.cancel();
             }
-            startPauseButton.setText("Start");
-        } else {
-            isRunning = true;
+            startPauseButton.setBackgroundColor(getResources().getColor(R.color.green));
+            startPauseButton.setText("Start Timer!");
+        }
+        else
+        {
+            isRunning = true; //if timer is running
             startPauseButton.setText("Pause");
+            startPauseButton.setBackgroundColor(getResources().getColor(R.color.red));
 
-            if (isWorkPeriod) {
+            if (isWorkPeriod)
+            {
                 backgroundLayout.setBackgroundColor(getResources().getColor(android.R.color.white));
-            } else {
+
+            }
+            else
+            {
                 backgroundLayout.setBackgroundColor(getResources().getColor(R.color.blue));
             }
 
-            countDownTimer = new CountDownTimer(remainingSeconds * 1000L, 1000) {
-                public void onTick(long millisUntilFinished) {
+            countDownTimer = new CountDownTimer(remainingSeconds * 1000L, 1000)
+            {
+                public void onTick(long millisUntilFinished)
+                {
                     remainingSeconds = (int) (millisUntilFinished / 1000);
                     updateTimerLabel();
                 }
 
-                public void onFinish() {
+                @SuppressLint("ResourceAsColor")
+                public void onFinish()
+                {
+                    isRunning = false;
+                    startPauseButton.setBackgroundColor(R.color.green);
+                    startPauseButton.setText("Start timer!");
+
                     isWorkPeriod = !isWorkPeriod;
-                    if (isWorkPeriod) {
-                        currentTaskIndex++;
-                        if (currentTaskIndex >= tasks.size()) {
-                            showCompletionMessage();
-                        } else {
-                            setTask(currentTaskIndex);
-                        }
-                    } else {
-                        // Handle break time (you can add logic to set break times here)
+                    if (isWorkPeriod)
+                    {
+                        backgroundLayout.setBackgroundColor(getResources().getColor(R.color.white));
+                        timer_on.setTextColor(R.color.gray);
+                        timerTextView.setTextColor(R.color.gray);
+                        taskNameTextView.setTextColor(R.color.gray);
+
+                    }
+                    else
+                    {
                         backgroundLayout.setBackgroundColor(getResources().getColor(R.color.blue));
-                        remainingSeconds = 300; // Example: 5-minute break
+                        timerTextView.setText("Relax a bit now!");
+                        timer_on.setTextColor(R.color.white);
+                        timerTextView.setTextColor(R.color.white);
+                        taskNameTextView.setTextColor(R.color.white);
                         updateTimerLabel();
-                        startPauseTimer();
+//                        startPauseTimer();
+                    }
+
+                    currentTaskIndex++;
+                    if (currentTaskIndex >= tasks.size())
+                    {
+                        showCompletionMessage();
+                    }
+                    else
+                    {
+                        setTask(currentTaskIndex);
                     }
                 }
             };
@@ -108,9 +149,12 @@ public class TimerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void showCompletionMessage() {
-        taskNameTextView.setText("You are done!");
-        backgroundLayout.setBackgroundColor(getResources().getColor(R.color.red));
+        timer_on.setText("You are done!");
+        backgroundLayout.setBackgroundColor(getResources().getColor(R.color.white));
         startPauseButton.setVisibility(View.GONE);
+        timerTextView.setVisibility(View.INVISIBLE);
+        check.setVisibility(View.VISIBLE);
+        taskIcon.setImageResource(R.drawable.taskcheck);
     }
 }
 
