@@ -63,7 +63,7 @@ public class TimerActivity extends AppCompatActivity
         updateTimerLabel();
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     private void startPauseTimer() {
         if (isRunning)
         {
@@ -83,11 +83,17 @@ public class TimerActivity extends AppCompatActivity
             if (isWorkPeriod)
             {
                 backgroundLayout.setBackgroundColor(getResources().getColor(android.R.color.white));
+                timer_on.setTextColor(getResources().getColor(R.color.gray));
+                timerTextView.setTextColor(getResources().getColor(R.color.gray));
+                taskNameTextView.setTextColor(getResources().getColor(R.color.gray));
 
             }
             else
             {
                 backgroundLayout.setBackgroundColor(getResources().getColor(R.color.blue));
+                timer_on.setTextColor(getResources().getColor(R.color.white));
+                timerTextView.setTextColor(getResources().getColor(R.color.white));
+                taskNameTextView.setTextColor(getResources().getColor(R.color.white));
             }
 
             countDownTimer = new CountDownTimer(remainingSeconds * 1000L, 1000)
@@ -102,25 +108,25 @@ public class TimerActivity extends AppCompatActivity
                 public void onFinish()
                 {
                     isRunning = false;
-                    startPauseButton.setBackgroundColor(R.color.green);
+                    startPauseButton.setBackgroundColor(getResources().getColor(R.color.green));
                     startPauseButton.setText("Start timer!");
 
                     isWorkPeriod = !isWorkPeriod;
                     if (isWorkPeriod)
                     {
                         backgroundLayout.setBackgroundColor(getResources().getColor(R.color.white));
-                        timer_on.setTextColor(R.color.gray);
-                        timerTextView.setTextColor(R.color.gray);
-                        taskNameTextView.setTextColor(R.color.gray);
+                        timer_on.setTextColor(getResources().getColor(R.color.gray));
+                        timerTextView.setTextColor(getResources().getColor(R.color.gray));
+                        taskNameTextView.setTextColor(getResources().getColor(R.color.gray));
 
                     }
                     else
                     {
                         backgroundLayout.setBackgroundColor(getResources().getColor(R.color.blue));
                         timerTextView.setText("Relax a bit now!");
-                        timer_on.setTextColor(R.color.white);
-                        timerTextView.setTextColor(R.color.white);
-                        taskNameTextView.setTextColor(R.color.white);
+                        timer_on.setTextColor(getResources().getColor(R.color.white));
+                        timerTextView.setTextColor(getResources().getColor(R.color.white));
+                        taskNameTextView.setTextColor(getResources().getColor(R.color.white));
                         updateTimerLabel();
 //                        startPauseTimer();
                     }
@@ -151,6 +157,9 @@ public class TimerActivity extends AppCompatActivity
     private void showCompletionMessage() {
         timer_on.setText("You are done!");
         backgroundLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        timer_on.setTextColor(getResources().getColor(R.color.gray));
+        timerTextView.setTextColor(getResources().getColor(R.color.gray));
+        taskNameTextView.setTextColor(getResources().getColor(R.color.gray));
         startPauseButton.setVisibility(View.GONE);
         timerTextView.setVisibility(View.INVISIBLE);
         check.setVisibility(View.VISIBLE);

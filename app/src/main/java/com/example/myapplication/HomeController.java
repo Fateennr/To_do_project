@@ -1,7 +1,10 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,14 +36,14 @@ public class HomeController extends AppCompatActivity {
 
         // Set the pivot points to the center of the dials
         minuteDial.post(() -> {
-            minuteDial.setPivotX(minuteDial.getWidth() / 2);
+            minuteDial.setPivotX((float) minuteDial.getWidth() / 2);
 //            minuteDial.setPivotX(100);
 
             minuteDial.setPivotY(minuteDial.getHeight());
         });
 
         hourDial.post(() -> {
-            hourDial.setPivotX(hourDial.getWidth()/2);
+            hourDial.setPivotX((float) hourDial.getWidth() /2);
             hourDial.setPivotY(hourDial.getHeight());
 //            hourDial.setPivotY(hourDial.getHeight() - (hourDial.getHeight() / 2));
         });
@@ -61,18 +64,19 @@ public class HomeController extends AppCompatActivity {
         handler.post(runnable);
 
         GetStartedButton = findViewById(R.id.GetStartedButton);
-//        GetStartedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Define an intent to open the SettingsActivity
-//                Intent intent = new Intent(HomeController.this, TimerController.class);
-//
-//                // Start the SettingsActivity
-//                startActivity(intent);
-//            }
-//        });
+        GetStartedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Define an intent to open the SettingsActivity
+                Intent intent = new Intent(HomeController.this, TaskActivity.class);
+
+                // Start the SettingsActivity
+                startActivity(intent);
+            }
+        });
     }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void updateClock() {
         Calendar now = Calendar.getInstance();
         int hours = now.get(Calendar.HOUR);
@@ -100,7 +104,7 @@ public class HomeController extends AppCompatActivity {
             Productive_Time.setText("Let's Have a Productive Morning!");
 
         } else {
-            if (hours < 6 || (hours == 12 && minutes == 0)) {
+            if (hours < 6) {
                 Productive_Time.setText("Let's Have a Productive Afternoon!");
             } else {
                 Productive_Time.setText("Let's Have a Productive Evening!");
